@@ -2,6 +2,10 @@
 
 Factorial::Factorial()
 {
+	for (int i = 0; i < MAX_FACTORIALS_COUNT; i++)
+	{
+		fac[i] = 0;
+	}
 	count = 0;
 }
 
@@ -24,9 +28,9 @@ void Factorial::BuildFrom(TheLongest n)
 	}
 	last--;
 
+	count = last;
 	while (last >= 0)
 	{
-		fac[last] = 0;
 		while (n >= factorials[last])
 		{
 			n = n - factorials[last];
