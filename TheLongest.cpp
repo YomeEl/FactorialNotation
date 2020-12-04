@@ -47,6 +47,51 @@ TheLongest TheLongest::operator-(const TheLongest& right)
 	return result;
 }
 
+TheLongest TheLongest::operator+(const TheLongest& right)
+{
+	TheLongest result;
+	result.number = "";
+	int ptr = 0;
+	int carry = 0;
+	while (ptr < right.number.length() && ptr < number.length())
+	{
+		int rpos = right.number.length() - ptr - 1;
+		int lpos = number.length() - ptr - 1;
+		int raw = (right.number[rpos] - '0') + (number[lpos] - '0') + carry;
+		result.number = std::to_string(raw % 10) + result.number;
+		carry = raw / 10;
+		ptr++;
+	}
+
+	if (carry)
+	{
+		result.number = std::to_string(carry) + result.number;
+	}
+
+	return result;
+}
+
+TheLongest TheLongest::operator*(const TheLongest& right)
+{
+	if (right.number == "10")
+	{
+		TheLongest res = right;
+		res.Mult10();
+		return res;
+	}
+
+	TheLongest sum = 0;
+	for (int i = 0; i < right.number.length(); i++)
+	{
+		TheLongest current;
+		current.number = right.number[i];
+		sum.Mult10();
+		sum = sum + *this * current;
+	}
+
+	return sum;
+}
+
 bool TheLongest::operator>(const TheLongest& right)
 {
 	TheLongest lhs = *this, rhs = right;
@@ -92,4 +137,12 @@ void TheLongest::RemoveLeadingZeroes(TheLongest& a)
 		cnt++;
 	}
 	a.number.erase(0, cnt);
+}
+
+void TheLongest::Mult10()
+{
+	if (*this > 0)
+	{
+		number += "0";
+	}
 }
