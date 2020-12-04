@@ -2,10 +2,7 @@
 
 Factorial::Factorial()
 {
-	for (int i = 0; i < FACTORIALS_COUNT; i++)
-	{
-		fac[i] = 0;
-	}
+	count = 0;
 }
 
 int Factorial::operator[](int i)
@@ -15,13 +12,30 @@ int Factorial::operator[](int i)
 
 void Factorial::BuildFrom(TheLongest n)
 {
-	throw new std::exception("BuldFrom is not implemented yet!");
+	TheLongest factorials[MAX_FACTORIALS_COUNT];
+	TheLongest cur = 1;
+	int last = 0;
+	while (cur < n)
+	{
+		factorials[last++] = cur;
+		cur = cur * (last + 1);
+	}
+
+	while (last > 0)
+	{
+		do
+		{
+			fac[last]++;
+			n = n - factorials[last];
+		} while (n > factorials[last]);
+		last--;
+	}
 }
 
 std::string Factorial::AsSum()
 {
 	std::string result = "";
-	for (int i = 0; i < FACTORIALS_COUNT; i++)
+	for (int i = 0; i < count; i++)
 	{
 		if (fac[i] > 0)
 		{
@@ -42,11 +56,7 @@ std::string Factorial::AsSum()
 
 std::string Factorial::AsVector()
 {
-	int cnt = FACTORIALS_COUNT;
-	while (fac[cnt] == 0)
-	{
-		cnt--;
-	}
+	int cnt = count;
 
 	if (cnt == 0)
 	{

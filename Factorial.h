@@ -1,7 +1,7 @@
 #pragma once
 #include "TheLongest.h"
 
-const int FACTORIALS_COUNT = 19;
+const int MAX_FACTORIALS_COUNT = 19;
 
 struct Factorial
 {
@@ -13,5 +13,6 @@ public:
 	std::string AsVector();
 
 private:
-	int fac[FACTORIALS_COUNT];
+	int fac[MAX_FACTORIALS_COUNT];
+	int count;
 };
