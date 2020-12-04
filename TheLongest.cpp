@@ -94,18 +94,18 @@ TheLongest TheLongest::operator*(const TheLongest& right)
 
 bool TheLongest::operator>(const TheLongest& right)
 {
-	TheLongest lhs = *this, rhs = right;
-	int length = EqualizeLengths(lhs, rhs);
-
-	bool result = false;
-	int ptr = 0;
-	while (!result && (ptr < length))
+	if (number.length() != right.number.length())
 	{
-		result = number[ptr] > right.number[ptr];
+		return number.length() > right.number.length();
+	}
+
+	int ptr = 0;
+	while (number[number.length() - 1 - ptr] == right.number[right.number.length() - 1 - ptr])
+	{
 		ptr++;
 	}
 
-	return result;
+	return (number[number.length() - 1 - ptr] == right.number[right.number.length() - 1 - ptr]);
 }
 
 bool TheLongest::operator>(const int& right)
