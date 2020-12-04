@@ -92,6 +92,11 @@ TheLongest TheLongest::operator*(const TheLongest& right)
 	return sum;
 }
 
+bool TheLongest::operator==(const TheLongest& right)
+{
+	return number == right.number;
+}
+
 bool TheLongest::operator>(const TheLongest& right)
 {
 	if (number.length() != right.number.length())
@@ -111,6 +116,11 @@ bool TheLongest::operator>(const TheLongest& right)
 bool TheLongest::operator>(const int& right)
 {
 	return *this > TheLongest(right);
+}
+
+bool TheLongest::operator<(const TheLongest& right)
+{
+	return !(*this > right || *this == right);
 }
 
 int TheLongest::EqualizeLengths(TheLongest& left, TheLongest& right)
