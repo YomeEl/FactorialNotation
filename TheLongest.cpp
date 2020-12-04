@@ -1,6 +1,16 @@
 #include "TheLongest.h"
 #include <string>
 
+TheLongest::TheLongest()
+{
+	number = "0";
+}
+
+TheLongest::TheLongest(int i)
+{
+	number = std::to_string(i);
+}
+
 TheLongest& TheLongest::operator=(const int& right)
 {
 	number = std::to_string(right);
@@ -51,6 +61,11 @@ bool TheLongest::operator>(const TheLongest& right)
 	}
 
 	return result;
+}
+
+bool TheLongest::operator>(const int& right)
+{
+	return *this > TheLongest(right);
 }
 
 int TheLongest::EqualizeLengths(TheLongest& left, TheLongest& right)
