@@ -53,11 +53,13 @@ TheLongest TheLongest::operator+(const TheLongest& right)
 	result.number = "";
 	int ptr = 0;
 	int carry = 0;
-	while (ptr < right.number.length() && ptr < number.length())
+	while (ptr < right.number.length() || ptr < number.length())
 	{
 		int rpos = right.number.length() - ptr - 1;
 		int lpos = number.length() - ptr - 1;
-		int raw = (right.number[rpos] - '0') + (number[lpos] - '0') + carry;
+		int r = rpos < right.number.length() ? right.number[rpos] - '0' : 0;
+		int l = lpos < number.length() ? number[lpos] - '0' : 0;
+		int raw = l + r + carry;
 		result.number = std::to_string(raw % 10) + result.number;
 		carry = raw / 10;
 		ptr++;
@@ -83,10 +85,9 @@ TheLongest TheLongest::operator*(const TheLongest& right)
 	TheLongest sum = 0;
 	for (int i = 0; i < right.number.length(); i++)
 	{
-		TheLongest current;
-		current.number = right.number[i];
 		sum.Mult10();
-		sum = sum + *this * current;
+		for (int j = 0; j < right.number[i] - '0'; j++)
+		sum = sum + *this;
 	}
 
 	return sum;
@@ -99,18 +100,23 @@ bool TheLongest::operator==(const TheLongest& right)
 
 bool TheLongest::operator>(const TheLongest& right)
 {
+	if (*this == right)
+	{
+		return false;
+	}
+
 	if (number.length() != right.number.length())
 	{
 		return number.length() > right.number.length();
 	}
 
 	int ptr = 0;
-	while (number[number.length() - 1 - ptr] == right.number[right.number.length() - 1 - ptr])
+	while (number[ptr] == right.number[ptr])
 	{
 		ptr++;
 	}
 
-	return (number[number.length() - 1 - ptr] == right.number[right.number.length() - 1 - ptr]);
+	return (number[ptr] > right.number[ptr]);
 }
 
 bool TheLongest::operator>(const int& right)

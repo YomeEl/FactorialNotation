@@ -13,21 +13,25 @@ int Factorial::operator[](int i)
 void Factorial::BuildFrom(TheLongest n)
 {
 	TheLongest factorials[MAX_FACTORIALS_COUNT];
-	TheLongest cur = 1;
-	int last = 0;
-	while (cur < n)
+	factorials[0] = 1;
+	int last = 1;
+	bool flag = true;
+	while (flag)
 	{
-		factorials[last++] = cur;
-		cur = cur * (last + 1);
+		factorials[last] = factorials[last - 1] * (last + 1);
+		flag = factorials[last] < n;
+		last += flag;
 	}
+	last--;
 
-	while (last > 0)
+	while (last >= 0)
 	{
-		do
+		fac[last] = 0;
+		while (n >= factorials[last])
 		{
-			fac[last]++;
 			n = n - factorials[last];
-		} while (n > factorials[last]);
+			fac[last]++;
+		}
 		last--;
 	}
 }
