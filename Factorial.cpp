@@ -47,7 +47,7 @@ std::string Factorial::AsSum()
 	{
 		if (fac[i] > 0)
 		{
-			result += std::to_string(fac[i]) + " * " + std::to_string(i) + "! + ";
+			result += std::to_string(fac[i]) + " * " + std::to_string(i + 1) + "! + ";
 		}
 	}
 	if (result.length() > 0)
