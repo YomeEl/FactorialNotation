@@ -23,12 +23,12 @@ void Factorial::BuildFrom(TheLongest n)
 	while (flag)
 	{
 		factorials[last] = factorials[last - 1] * (last + 1);
-		flag = factorials[last] < n;
+		flag = factorials[last] <= n;
 		last += flag;
 	}
 	last--;
 
-	count = last;
+	count = last + 1;
 	while (last >= 0)
 	{
 		while (n >= factorials[last])
