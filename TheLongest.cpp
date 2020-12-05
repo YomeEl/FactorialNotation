@@ -77,7 +77,7 @@ TheLongest TheLongest::operator*(const TheLongest& right)
 {
 	if (right.number == "10")
 	{
-		TheLongest res = right;
+		TheLongest res = *this;
 		res.Mult10();
 		return res;
 	}
