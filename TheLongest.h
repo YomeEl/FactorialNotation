@@ -17,6 +17,7 @@ public:
 	bool operator>(const int& right);
 	bool operator<(const TheLongest& right);
 	bool operator>=(const TheLongest& right);
+	bool operator<=(const TheLongest& right);
 
 private:
 	std::string number;
