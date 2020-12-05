@@ -9,7 +9,7 @@ bool CheckInput(std::string input)
 		result = result && (input[i] >= '0' && input[i] <= '9');
 	}
 
-	return result;
+	return result && input.length() < 18;
 }
 
 int main()
