@@ -33,7 +33,7 @@ int main()
 
 	Factorial f;
 	f.BuildFrom(N);
-	std::cout << f.AsVector();
+	std::cout << f.AsVector() << std::endl << f.AsSum();
 
 	std::cout << std::endl;
 	system("pause");
