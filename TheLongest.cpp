@@ -139,6 +139,11 @@ bool TheLongest::operator<=(const TheLongest& right)
 	return !(*this > right);
 }
 
+std::string TheLongest::ToString()
+{
+	return number;
+}
+
 int TheLongest::EqualizeLengths(TheLongest& left, TheLongest& right)
 {
 	int dif = left.number.length() - right.number.length();

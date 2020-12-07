@@ -19,6 +19,8 @@ public:
 	bool operator>=(const TheLongest& right);
 	bool operator<=(const TheLongest& right);
 
+	std::string ToString();
+
 private:
 	std::string number;
 	//Делает длину left и right одинаковой, добавляя незначащие нули, и возвращает эту длину
