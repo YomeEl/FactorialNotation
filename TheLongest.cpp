@@ -25,15 +25,16 @@ TheLongest& TheLongest::operator=(const std::string& right)
 
 TheLongest TheLongest::operator-(const TheLongest& right)
 {
-	TheLongest lhs = *this, rhs = right;
-	int length = EqualizeLengths(lhs, rhs);
-
 	TheLongest result;
 	result.number = "";
 	bool carry = false;
-	for (int i = length - 1; i >= 0; i--)
+	int apos = number.length() - 1;
+	int bpos = right.number.length() - 1;
+	while (apos >= 0 || bpos >= 0)
 	{
-		int raw = lhs.number[i] - rhs.number[i] - carry;
+		int a = apos >= 0 ? number[apos] - '0' : 0;
+		int b = bpos >= 0 ? right.number[bpos] - '0' : 0; 
+		int raw = a - b - carry;
 		carry = false;
 		if (raw < 0)
 		{
@@ -41,6 +42,8 @@ TheLongest TheLongest::operator-(const TheLongest& right)
 			carry = true;
 		}
 		result.number = std::to_string(raw) + result.number;
+		apos--;
+		bpos--;
 	}
 
 	RemoveLeadingZeroes(result);
@@ -142,22 +145,6 @@ bool TheLongest::operator<=(const TheLongest& right)
 std::string TheLongest::ToString()
 {
 	return number;
-}
-
-int TheLongest::EqualizeLengths(TheLongest& left, TheLongest& right)
-{
-	int dif = left.number.length() - right.number.length();
-
-	if (dif < 0)
-	{
-		left.number.insert(0, -dif, '0');
-	}
-	else
-	{
-		right.number.insert(0, dif, '0');
-	}
-
-	return left.number.length();
 }
 
 void TheLongest::RemoveLeadingZeroes(TheLongest& a)

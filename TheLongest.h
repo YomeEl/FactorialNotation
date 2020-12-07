@@ -23,9 +23,7 @@ public:
 
 private:
 	std::string number;
-	//Делает длину left и right одинаковой, добавляя незначащие нули, и возвращает эту длину
-	int EqualizeLengths(TheLongest& left, TheLongest& right);
-	//Удаляет незначащие нули из числа a
+
 	void RemoveLeadingZeroes(TheLongest& a);
 	void Mult10();
 };
