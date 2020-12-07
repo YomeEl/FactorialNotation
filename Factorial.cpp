@@ -16,6 +16,7 @@ int Factorial::operator[](int i)
 
 void Factorial::BuildFrom(TheLongest n)
 {
+	original = n;
 	TheLongest factorials[MAX_FACTORIALS_COUNT];
 	factorials[0] = 1;
 	int last = 1;
@@ -42,8 +43,8 @@ void Factorial::BuildFrom(TheLongest n)
 
 std::string Factorial::AsSum()
 {
-	std::string result = "";
-	for (int i = 0; i < count; i++)
+	std::string result = original.ToString() + " = ";
+	for (int i = count - 1; i >= 0; i--)
 	{
 		if (fac[i] > 0)
 		{
@@ -64,15 +65,13 @@ std::string Factorial::AsSum()
 
 std::string Factorial::AsVector()
 {
-	int cnt = count;
-
-	if (cnt == 0)
+	if (count == 0)
 	{
 		return "(0)";
 	}
 
-	std::string result = "(";
-	for (int i = 0; i < cnt; i++)
+	std::string result = original.ToString() + " = (";
+	for (int i = count - 1; i >= 0; i--)
 	{
 		result += std::to_string(fac[i]) + ", ";
 	}
