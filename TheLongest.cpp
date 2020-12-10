@@ -20,6 +20,7 @@ TheLongest& TheLongest::operator=(const int& right)
 TheLongest& TheLongest::operator=(const std::string& right)
 {
 	number = right;
+	RemoveLeadingZeroes(*this);
 	return *this;
 }
 
