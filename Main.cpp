@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Factorial.h"
+#include <fstream>
 
 bool CheckInput(std::string input)
 {
@@ -12,7 +13,7 @@ bool CheckInput(std::string input)
 	return result && input.length() < 18;
 }
 
-int main()
+void UseConsole()
 {
 	setlocale(LC_ALL, "Russian");
 
@@ -37,6 +38,48 @@ int main()
 
 	std::cout << std::endl;
 	system("pause");
+}
+
+void UseFiles()
+{
+	using std::string;
+
+	string ifname = "input.txt";
+	string ofname = "output.txt";
+
+	std::ifstream in(ifname);
+	std::ofstream out(ofname);
+
+	string input;
+	std::getline(in, input);
+	if (CheckInput(input))
+	{
+		TheLongest N;
+		N = input;
+
+		Factorial f;
+		f.BuildFrom(N);
+
+		out << f.AsSum();
+	}
+	else
+	{
+		out << "Некорректный ввод!";
+	}
+}
+
+int main()
+{
+	const bool USE_FILES = true;
+
+	if (USE_FILES)
+	{
+		UseFiles();
+	}
+	else
+	{
+		UseConsole();
+	}
 
 	return 0;
 }

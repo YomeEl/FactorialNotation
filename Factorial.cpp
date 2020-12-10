@@ -51,13 +51,13 @@ std::string Factorial::AsSum()
 			result += std::to_string(factorials[i]) + " * " + std::to_string(i + 1) + "! + ";
 		}
 	}
-	if (result.length() > 0)
+	if (result.length() > 4)
 	{
 		result.erase(result.length() - 3, 3);
 	}
 	else
 	{
-		result = "0";
+		result += "0";
 	}
 
 	return result;
