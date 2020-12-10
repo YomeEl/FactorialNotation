@@ -42,15 +42,13 @@ void UseConsole()
 
 void UseFiles()
 {
-	using std::string;
-
-	string ifname = "input.txt";
-	string ofname = "output.txt";
+	std::string ifname = "input.txt";
+	std::string ofname = "output.txt";
 
 	std::ifstream in(ifname);
 	std::ofstream out(ofname);
 
-	string input;
+	std::string input;
 	std::getline(in, input);
 	if (CheckInput(input))
 	{
@@ -70,7 +68,7 @@ void UseFiles()
 
 int main()
 {
-	const bool USE_FILES = true;
+	const bool USE_FILES = false;
 
 	if (USE_FILES)
 	{
