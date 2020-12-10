@@ -13,7 +13,7 @@ public:
 	std::string AsVector();
 
 private:
-	int fac[MAX_FACTORIALS_COUNT];
+	int factorials[MAX_FACTORIALS_COUNT];
 	int count;
 	TheLongest original;
 };

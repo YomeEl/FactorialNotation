@@ -4,27 +4,27 @@ Factorial::Factorial()
 {
 	for (int i = 0; i < MAX_FACTORIALS_COUNT; i++)
 	{
-		fac[i] = 0;
+		factorials[i] = 0;
 	}
 	count = 0;
 }
 
 int Factorial::operator[](int i)
 {
-	return fac[i];
+	return factorials[i];
 }
 
 void Factorial::BuildFrom(TheLongest n)
 {
 	original = n;
-	TheLongest factorials[MAX_FACTORIALS_COUNT];
-	factorials[0] = 1;
+	TheLongest base[MAX_FACTORIALS_COUNT];
+	base[0] = 1;
 	int last = 1;
 	bool flag = true;
 	while (flag)
 	{
-		factorials[last] = factorials[last - 1] * (last + 1);
-		flag = factorials[last] <= n;
+		base[last] = base[last - 1] * (last + 1);
+		flag = base[last] <= n;
 		last += flag;
 	}
 	last--;
@@ -32,10 +32,10 @@ void Factorial::BuildFrom(TheLongest n)
 	count = last + 1;
 	while (last >= 0)
 	{
-		while (n >= factorials[last])
+		while (n >= base[last])
 		{
-			n = n - factorials[last];
-			fac[last]++;
+			n = n - base[last];
+			factorials[last]++;
 		}
 		last--;
 	}
@@ -46,9 +46,9 @@ std::string Factorial::AsSum()
 	std::string result = original.ToString() + " = ";
 	for (int i = count - 1; i >= 0; i--)
 	{
-		if (fac[i] > 0)
+		if (factorials[i] > 0)
 		{
-			result += std::to_string(fac[i]) + " * " + std::to_string(i + 1) + "! + ";
+			result += std::to_string(factorials[i]) + " * " + std::to_string(i + 1) + "! + ";
 		}
 	}
 	if (result.length() > 0)
@@ -73,7 +73,7 @@ std::string Factorial::AsVector()
 	std::string result = original.ToString() + " = (";
 	for (int i = count - 1; i >= 0; i--)
 	{
-		result += std::to_string(fac[i]) + ", ";
+		result += std::to_string(factorials[i]) + ", ";
 	}
 	result.erase(result.length() - 1, 1);
 	result[result.length() - 1] = ')';
